@@ -37,7 +37,7 @@ module.exports = {
       {
         first_name : 'Yulius',
         last_name : 'Prawiranegara',
-        email : 'bambangsuprapto@sekolah.id',
+        email : 'yuliusprawiranegara@sekolah.id',
         createdAt : new Date(),
         updatedAt : new Date()
       }

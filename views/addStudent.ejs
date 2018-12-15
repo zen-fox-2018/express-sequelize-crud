@@ -106,39 +106,35 @@
             </div>
             <!-- page title area end -->
             <div class="main-content-inner">
-                <div class="row">
-                    <div class="col-lg-6 col-ml-12">
-                        <div class="row">
-                            <!-- Textual inputs start -->
-                            <div class="col-12 mt-5">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="header-title"><%= title %></h4>
-                                        <p class="text-muted font-14 mb-4"><%= message %></p>
-                                        <form action="/student" method="post">
-                                          <div class="form-group">
-                                            <label for="example-text-input" class="col-form-label">First Name</label>
-                                            <input class="form-control" type="text" placeholder="First Name" id="first_name" name="first_name">
-                                          </div>
-                                          <div class="form-group">
-                                            <label for="example-text-input" class="col-form-label">Last Name</label>
-                                            <input class="form-control" type="text" placeholder="Last Name" id="last_name" name="last_name">
-                                          </div>
-                                          <div class="form-group">
-                                            <label for="example-text-input" class="col-form-label">Email</label>
-                                            <input class="form-control" type="email" placeholder="Email" id="email" name="email">
-                                          </div>
-                                          <div class="form-group pull-right">
-                                            <button type="submit" class="btn btn-primary mb-3">Submit</button>
-                                            <button type="cancel" class="btn btn-danger mb-3">Cancel</button>
-                                        </div>
-                                        </form>
-                                  </div>
+                <div class="row justify-content-center">
+                  <!-- Textual inputs start -->
+                  <div class="col-lg-6 mt-5">
+                      <div class="card">
+                          <div class="card-body">
+                              <h4 class="header-title"><%= title %></h4>
+                              <p class="text-muted font-14 mb-4"><%= message %></p>
+                              <form action="/student" method="post">
+                                <div class="form-group">
+                                  <label for="example-text-input" class="col-form-label">First Name</label>
+                                  <input class="form-control" type="text" placeholder="First Name" id="first_name" name="first_name">
                                 </div>
-                            </div>
-                            <!-- Textual inputs end -->
+                                <div class="form-group">
+                                  <label for="example-text-input" class="col-form-label">Last Name</label>
+                                  <input class="form-control" type="text" placeholder="Last Name" id="last_name" name="last_name">
+                                </div>
+                                <div class="form-group">
+                                  <label for="example-text-input" class="col-form-label">Email</label>
+                                  <input class="form-control" type="email" placeholder="Email" id="email" name="email">
+                                </div>
+                                <div class="form-group pull-right">
+                                  <button type="submit" class="btn btn-primary mb-3">Submit</button>
+                                  <button type="cancel" class="btn btn-danger mb-3">Cancel</button>
+                              </div>
+                              </form>
                         </div>
-                    </div>
+                      </div>
+                  </div>
+                  <!-- Textual inputs end -->
                 </div>
             </div>
         </div>
