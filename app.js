@@ -58,6 +58,51 @@ app.post('/teachers/add', function(req, res) {
     })
 })
 
+app.get('/teachers/edit/:id', function(req, res) {
+    let getId = req.params.id
+    Model.Teacher.findByPk(getId)
+    .then(teacherData => {
+        // console.log(studentData.dataValues);
+        // res.send(studentData.dataValues.first_name)
+        let data = teacherData.dataValues
+        res.render('./edit_teacher_page.ejs', 
+        {
+            title: 'Edit Teacher Data',
+            getId,
+            data
+        })
+    })
+    .catch(err => {
+        res.send(err)
+    })
+})
+
+app.post('/teachers/edit/:id', function(req, res) {
+    let updTchr = null
+    let dataUpdated = req.body //input data yang baru masuk
+    
+    let objFirstName = {}
+    let objLastName = {}
+    let objEmail = {}
+    dataUpdated.id = req.params.id
+    Model.Teacher.findByPk(req.params.id)
+    .then(data => {
+        updTchr = data.dataValues
+        objFirstName.first_name = dataUpdated["First Name"]
+        Model.Teacher.update(objFirstName, {where: {id: updTchr.id}})
+        objLastName.last_name = dataUpdated["Last Name"]
+        Model.Teacher.update(objLastName, {where: {id: updTchr.id}})
+        objEmail.email = dataUpdated.Email
+        return Model.Teacher.update(objEmail, {where: {id: updTchr.id}})
+    })
+    .then(function() {
+        res.redirect('/teachers')
+    })
+    .catch(err => {
+        res.send(err)
+    })
+})
+
 app.get('/teachers/delete/:id', function(req, res) {
     let tchr = null
     Model.Teacher.findByPk(req.params.id)
@@ -130,16 +175,22 @@ app.get('/students/edit/:id', function(req, res) {
 
 app.post('/students/edit/:id', function(req, res) {
     let updStud = null
-    let dataUpdated = req.body
+    let dataUpdated = req.body //input data yang baru masuk
+    // console.log(dataUpdated);
+    let objFirstName = {}
+    let objLastName = {}
+    let objEmail = {}
     dataUpdated.id = req.params.id
-    dataUpdated.createdAt = new Date()
-    dataUpdated.updatedAt = new Date()
-    // console.log('====>', newStud);
-    // console.log(req.params.id);
+    // console.log(req.params.id); //dapet idnya
     Model.Student.findByPk(req.params.id)
     .then(data => {
         updStud = data.dataValues
-        return Model.Student.update(dataUpdated, {where: {id: updStud.id}})
+        objFirstName.first_name = dataUpdated["First Name"]
+        Model.Student.update(objFirstName, {where: {id: updStud.id}})
+        objLastName.last_name = dataUpdated["Last Name"]
+        Model.Student.update(objLastName, {where: {id: updStud.id}})
+        objEmail.email = dataUpdated.Email
+        return Model.Student.update(objEmail, {where: {id: updStud.id}})
     })
     .then(function() {
         res.redirect('/students')
@@ -196,6 +247,42 @@ app.post('/subjects/add', function(req, res) {
     Model.Subject.create(subjectData)
     .then(subjectData => {
         res.redirect('/')
+    })
+    .catch(err => {
+        res.send(err)
+    })
+})
+
+app.get('/subjects/edit/:id', function(req, res) {
+    let getId = req.params.id
+    Model.Subject.findByPk(getId)
+    .then(subjData => {
+        let data = subjData.dataValues
+        res.render('./edit_subject.ejs', 
+        {
+            title: 'Edit Subject Data',
+            getId,
+            data
+        })
+    })
+    .catch(err => {
+        res.send(err)
+    })
+})
+
+app.post('/subjects/edit/:id', function(req, res) {
+    let updSub = null
+    let dataUpdated = req.body //input data yang baru masuk
+    let objSubject = {}
+    dataUpdated.id = req.params.id
+    Model.Subject.findByPk(req.params.id)
+    .then(data => {
+        updSub = data.dataValues
+        objSubject.subject_name = dataUpdated.subject_name
+        return Model.Subject.update(objSubject, {where: {id: updSub.id}})
+    })
+    .then(function() {
+        res.redirect('/subjects')
     })
     .catch(err => {
         res.send(err)
