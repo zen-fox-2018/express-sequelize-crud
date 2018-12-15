@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Student</title>
+</head>
+<body>
+    <h1>WELLCOME STUDENTS</h1>
+    <table>
+        <tr>
+            <th>No.</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+        </tr>
+        <%let no = 1%>
+        <% data.forEach(student => { %>
+        <tr>
+            <td><%= no %></td>
+            <td><%= student.first_name %></td>
+            <td><%= student.last_name %></td>
+            <td><%= student.email %></td>
+            
+            <td><a href="/students/edit/<%= student.id %>">Edit</a> || <a href="/students/delete/<%= student.id %>">Delete</a></td>
+            <% no++ %>
+        </tr>
+        <% }) %>
+    </table>
+
+    <h5><a href="/">HOME</a></h5>
+</body>
+</html>
