@@ -1,3 +1,8 @@
 <%- include ./partial/header.ejs %>
+<% if(msg) { %>
+  <div class="alert alert-info">
+    <strong><%= msg %></strong>
+  </div>
+<% } %>
 <h1 style="text-align: center">WELCOME TO OUR HOMEPAGE!</h1>
 <%- include ./partial/footer.ejs %>

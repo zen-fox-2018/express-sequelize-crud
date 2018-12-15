@@ -36,9 +36,13 @@ class StudentController {
       Student.findOne({where: {email}})
         .then(data => {
            if(!data) {
-             res(`Email didn't match`)
+             rej(`Email not found`)
            } else {
-             return Student.update({first_name, last_name}, {where: {id}})
+             if(data.email !== email) {
+               rej(`Email didn't match!`)
+             } else {
+               return Student.update({first_name, last_name}, {where: {id}})
+             }
             }
           })
         .then(count => {
