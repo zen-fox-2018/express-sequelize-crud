@@ -28,10 +28,9 @@ route.post('/add', (req, res) => {
 route.get('/edit/:id', (req,res) => {
     Controller.findOne(req.params.id)
         .then(data => {
-            res.render('form-student.ejs', {data: data.dataValues})
+            res.render('form-edit-student.ejs', {data: data.dataValues})
         })
         .catch(err => {
-            console.log(err)
             res.send(err)
         })
 })
@@ -49,7 +48,7 @@ route.post('/edit/:id', (req, res) => {
 route.get('/delete/:id', (req, res) => {
     Controller.delete(req.params.id)
         .then(data => {
-            res.send('sukses')
+            res.redirect('/students')
         })
         .catch(err => {
             res.send('failed')

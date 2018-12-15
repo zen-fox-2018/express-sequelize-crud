@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Subject</title>
+</head>
+<body>
+    <h1>SUBJECT LIST</h1>
+    <table>
+    
+    <tr>
+            <th>No.</th>
+            <th>Subject Name</th>
+    </tr>
+
+    <%let no = 1%>
+    <% data.forEach(subject => { %>
+    <tr>
+        <td><%= no %></td>
+        <td><%= subject.subject_name %></td>
+        <td><a href="/subjects/edit/<%= subject.id %>">Edit</a> || <a href="/subjects/delete/<%= subject.id %>">Delete</a></td>
+        <% no++ %>
+    </tr>
+    <% }) %>
+    </table>
+</body>
+</html>

@@ -6,8 +6,7 @@ class Controller {
         return new Promise((resolve, reject) => {
             Model.Student.findAll()
                 .then(data => {
-                    let newdata = data.map(element => element.dataValues)
-                    resolve(newdata)
+                    resolve(data)
                 })
                 .catch(err => {
                     reject(err)
