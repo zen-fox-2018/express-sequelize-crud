@@ -58,6 +58,21 @@ app.post('/teachers/add', function(req, res) {
     })
 })
 
+app.get('/teachers/delete/:id', function(req, res) {
+    let tchr = null
+    Model.Teacher.findByPk(req.params.id)
+    .then(data => {
+        tchr = data.dataValues
+        return Model.Teacher.destroy({where: {id: tchr.id}})
+    })
+    .then(() => {
+        res.redirect('/teachers')
+    })
+    .catch(err => {
+        res.send(err)
+    })
+})
+
 
 //STUDENT
 app.get('/students', function(req, res) {
@@ -113,18 +128,40 @@ app.get('/students/edit/:id', function(req, res) {
     })
 })
 
-app.post('students/edit/:id', function(req, res) {
-    let newStud = req.body
-    console.log('====>', newStud);
-    console.log(req.params);
-    
-    // Model.Student.update(newStud, {where: {id: req.params.id}})
-    // .then(function() {
-    //     res.redirect('/students')
-    // })
-    // .catch(err => {
-    //     res.send(err)
-    // })
+app.post('/students/edit/:id', function(req, res) {
+    let updStud = null
+    let dataUpdated = req.body
+    dataUpdated.id = req.params.id
+    dataUpdated.createdAt = new Date()
+    dataUpdated.updatedAt = new Date()
+    // console.log('====>', newStud);
+    // console.log(req.params.id);
+    Model.Student.findByPk(req.params.id)
+    .then(data => {
+        updStud = data.dataValues
+        return Model.Student.update(dataUpdated, {where: {id: updStud.id}})
+    })
+    .then(function() {
+        res.redirect('/students')
+    })
+    .catch(err => {
+        res.send(err)
+    })
+})
+
+app.get('/students/delete/:id', function(req, res) {
+    let stu = null
+    Model.Student.findByPk(req.params.id)
+    .then(data => {
+        stu = data.dataValues
+        return Model.Student.destroy({where: {id: stu.id}})
+    })
+    .then(() => {
+        res.redirect('/students')
+    })
+    .catch(err => {
+        res.send(err)
+    })
 })
 
 //SUBJECTS
@@ -159,6 +196,21 @@ app.post('/subjects/add', function(req, res) {
     Model.Subject.create(subjectData)
     .then(subjectData => {
         res.redirect('/')
+    })
+    .catch(err => {
+        res.send(err)
+    })
+})
+
+app.get('/subjects/delete/:id', function(req, res) {
+    let sub = null
+    Model.Subject.findByPk(req.params.id)
+    .then(data => {
+        sub = data.dataValues
+        return Model.Subject.destroy({where: {id: sub.id}})
+    })
+    .then(() => {
+        res.redirect('/subjects')
     })
     .catch(err => {
         res.send(err)
