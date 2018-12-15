@@ -14,6 +14,8 @@ app.use(express.urlencoded({extended: false}))
 //     console.log(err)
 // })
 
+
+//TEACHER
 app.get('/', function(req, res) {
     res.send('MASUKKIN INDEX KE SELURUH DUNIA')
 })
@@ -34,6 +36,30 @@ app.get('/teachers', function(req, res) {
     })
 })
 
+app.get('/teachers/add', function(req, res) {
+    res.render('./teachers_registration_form.ejs')
+})
+
+app.post('/teachers/add', function(req, res) {
+    let e = req.body
+    let teacherData = {
+        first_name: e["First Name"],
+        last_name: e["Last Name"],
+        email: e["Email"],
+        createdAt: new Date(),
+        updatedAt: new Date()
+    }
+    Model.Teacher.create(teacherData)
+    .then(teacherData => {
+        res.redirect('/')
+    })
+    .catch(err => {
+        res.send(err)
+    })
+})
+
+
+//STUDENT
 app.get('/students', function(req, res) {
     Model.Student.findAll()
     .then(allStudents => {
@@ -92,9 +118,47 @@ app.post('students/edit/:id', function(req, res) {
     console.log('====>', newStud);
     console.log(req.params);
     
-    Model.Student.update(newStud, {where: {id: req.params.id}})
-    .then(function() {
-        res.redirect('/students')
+    // Model.Student.update(newStud, {where: {id: req.params.id}})
+    // .then(function() {
+    //     res.redirect('/students')
+    // })
+    // .catch(err => {
+    //     res.send(err)
+    // })
+})
+
+//SUBJECTS
+
+app.get('/subjects', function(req, res) {
+    // res.send("tes ya boi")
+    Model.Subject.findAll()
+    .then(allSubjects => {
+        let allData = []
+        allSubjects.forEach(element => {
+            allData.push(element.dataValues)
+        });
+        res.render('./subjects_table.ejs', 
+        {title: 'Subjects List', allData, route: 'subjects'})
+    })
+    .catch(err => {
+        res.send(`ERROR!: ${err}`)
+    })
+})
+
+app.get('/subjects/add', function(req, res) {
+    res.render('./subjects_form.ejs')
+})
+
+app.post('/subjects/add', function(req, res) {
+    let e = req.body
+    let subjectData = {
+        subject_name: e["subject_name"],
+        createdAt: new Date(),
+        updatedAt: new Date()
+    }
+    Model.Subject.create(subjectData)
+    .then(subjectData => {
+        res.redirect('/')
     })
     .catch(err => {
         res.send(err)
