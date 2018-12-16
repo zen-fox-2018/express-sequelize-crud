@@ -17,7 +17,12 @@ app.use(express.urlencoded({extended: false}))
 
 //TEACHER
 app.get('/', function(req, res) {
-    res.send('MASUKKIN INDEX KE SELURUH DUNIA')
+    res.render('./homepage.ejs')
+})
+
+app.get('/editdata', function(req, res) {
+    res.send(`Silahkan ganti 'editdata' dalam alamat menjadi aspek yang ingin diubah, ditambah dengan id yang dituju di akhir alamat Contoh: 'subjects/5'
+    'Keyword: 1. students 2. teachers 3. subjects`)
 })
 
 app.get('/teachers', function(req, res) {
