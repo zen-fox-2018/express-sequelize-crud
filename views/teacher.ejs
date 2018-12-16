@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Teachers Data</title>
+  <link rel="stylesheet" href="/public/table.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <table>
+
+      <h2 style="text-align: center; font-weight: bold">Teachers Data</h2>
+
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+
+      <% dataTeacher.forEach(data => { %>
+
+      <tbody>
+        <tr>
+          <th>
+            <%= data.dataValues.id %>
+          </th>
+          <td>
+            <%= data.dataValues.first_name %>
+          </td>
+          <td>
+            <%= data.dataValues.last_name %>
+          </td>
+          <td style="text-align: center">
+            <%= data.dataValues.email %>
+          </td>
+          <td>
+            <a href="/teachers/edit/<%= data.dataValues.id %>">
+              <i class="material-icons button edit">edit</i>
+            </a>
+            <a href="/teachers/delete/<%= data.dataValues.id %>" onclick="return confirm('Delete this data?')">
+              <i class="material-icons button delete">delete</i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+
+      <% }); %>
+
+    </table>
+
+    <form action="/teachers/add" method="get">
+      <input class="add-btn" type="submit" value="Add Teacher">
+    </form>
+
+  </div>
+
+
+</body>
+
+</html>
