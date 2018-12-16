@@ -166,6 +166,60 @@ app.get('/subject', function (req, res) {
 
 })
 
+app.get('/subject/add', function (req, res) {
+    res.render('addSubject.ejs')
+})
+app.post('/subject/add', function (req, res) {
+    let objSubject = req.body
+    let objSubject = {
+        subject_name: objSubject['subject_name']        
+    }
+    Model.Subject.create(objSubject)
+    .then( ()=>{
+        res.redirect('/subject')
+    })
+    .catch(err=>{
+        res.send(err)
+    })
+})
+
+app.get('/subject/edit/:id',function(req,res){
+    let search_id = req.params.id
+    Model.Subject.findOne({where:{id:search_id}})
+    .then((datanya)=>{
+        res.render('editSubjectData.ejs',{data: datanya})
+    })
+    .catch(err=>{
+        res.send(err)
+    })
+})
+
+app.post('/subject/edit/:id', function(req,res){
+    let search_id = req.params.id
+    let editedData = req.body
+    Model.Student.update({
+        subject_name : editedData['subject_name']
+        
+    },{where:{id:search_id}})
+    .then(()=>{
+        res.redirect('/subject')
+    })
+    .catch(err=>{
+        res.send(err)
+    })
+})
+
+app.get('/subject/delete/:id',function(req,res){
+    let search_id = req.params.id
+    Model.Subject.destroy({where:{id:search_id}})
+    .then(()=>{
+        res.redirect('/subject')
+    })
+    .catch(err=>{
+        res.send(err)
+    })
+})
+
 
 app.listen(3000, function () {
     console.log(`server listening on port 3000`)

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add Subject</title>
+        
+    </head>
+    <body>
+        <h1 >Add Subject Data</h1>
+        <h4 ><a href = "/subject"  >show all data</a></h4>
+        <form action="/subject/edit/<%=data.id%>" method = "POST">
+            <label for= "subject_name"><b>Subject Name</b></label><br>
+            <input type="text" name="subject_name"  required><br>
+            
+            <button type= "submit" >Add Subject</button>
+        </form>
+    </body>
+</html>
