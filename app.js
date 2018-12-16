@@ -41,7 +41,7 @@ app.get('/students/add', (req,res) => {
 app.post('/students/add', (req, res)=> {
     
     Student.create(req.body)
-    .then(newUser => {
+    .then(() => {
         res.redirect(`/students?info=Success%20Add%20Data%20${req.body.first_name}`)
     })
     .catch(err => res.redirect(`/students?err=${err}`))
