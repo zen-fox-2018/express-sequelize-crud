@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>School</title>
+  <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+  <div class="title">
+    <h1>DATA <%= route.toUpperCase() %></h1>
+    <h2><a href="/<%=route%>/add">Add <%= route%></a></h2>
+    <form action = "/" method="get">
+      <input type="submit" value="HOME"/>
+    </form>
+  </div>
+  <div class="data">
+    <table id = "customers">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Option</th>
+        </tr>
+        
+        <tr>
+            <%if (no.length != 0) {%>
+              <td><%= no %></td>
+              <%}%>
+        </tr>
+        
+        <% user.forEach(function(data){%>
+        <tr>
+            <td><%= data.first_name %></td>
+            <td><%= data.last_name %></td>
+            <td><%= data.email %></td> 
+          
+              <td>
+              <a href="/<%=route%>/edit/<%=data.id%>">Edit</a> | 
+              <a href="/<%=route%>/delete/<%=data.id%>"  onclick="return confirm('Delete this <%=route%>?')">Delete</a>
+              </td>      
+        </tr>
+        <%})%>
+      </table>
+  </div>
+</body>
+</html>

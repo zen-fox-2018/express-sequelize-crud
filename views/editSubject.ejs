@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>School</title>
+  <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+  <h1>EDIT SUBJECT></h1>
+<h2><a href="/Subject/add">Add Subject</a></h2>
+      <form action="/Subject/edit" method="POST">
+        Subject Name:<br>
+        <input type="text" name="subject" value = "<%= user.subject_name%>">
+        <input type="hidden" name="id" value = "<%= user.id%>">
+        <br><br>
+        <input type="submit" value="EDIT SUBJECT">
+      </form> 
+      <form action = "/Subject" method="get">
+        <input type="submit" value="BACK"/>
+      </form>
+</body>
+</html>

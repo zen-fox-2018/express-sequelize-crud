@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>challenge</title>
+  <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+  <h1>ADD <%= route.toUpperCase() %></h1>
+    <form action="/<%= route %>/add" method="POST">
+        First name:<br>
+        <input type="text" name="firstname">
+        <br>
+        Last name:<br>
+        <input type="text" name="lastname">
+        <br>
+        email:<br>
+        <input type="text" name="email">
+        <br><br>
+        <input type="submit" value="ADD <%= route.toUpperCase() %>">
+      </form>  
+</body>
+</html>
