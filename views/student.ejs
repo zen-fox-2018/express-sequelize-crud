@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Student Data </title>
+    
+    <style>
+        table {
+            width: 100%;
+        }
+        table, th, td {
+            text-align: center;
+            border-bottom: 2px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }        
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: green">Student Data</h1>
+    <h4 style="text-align: center;"><a style="color: green;text-decoration: none" href="addStudent"><a href="/student/add">Add new Student</a></h4>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th >First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Options</th>
+        </tr>
+            <% data.forEach(allStudentData => {%>
+            <tr>
+                <td><%= allStudentData.id %></td>
+                <td><%= allStudentData.first_name %></td>
+                <td><%= allStudentData.last_name %></td>
+                <td><%= allStudentData.email %></td>
+                <td><p><a href= "/student/edit/<%=allStudentData.id%>">Edit</a> | <a href = "/student/delete/<%=allStudentData.id%>" onclick = "return confirm('Delete this student?')">Delete</a></p></td>
+            </tr>
+            <%})%>
+    </table>
+</body>
+</html>
