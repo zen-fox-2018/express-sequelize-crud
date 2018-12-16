@@ -86,30 +86,37 @@ app.post('/student', (req, res) => {
   let newStudent = req.body;
   Model.Student.create(newStudent)
   .then((data) => {
+    req.flash('postSuccessMsg', `Successfully added`);
     res.redirect('/student')
   })
 
-  res.redirect('/student')
   .catch((err) => {
-    console.log(err);
+    req.flash('postErrorMsg', err.errors[0].message.msg);
+    res.redirect('/student')
   })
 })
 
 app.post('/student/edit/:id', (req, res) => {
   let newStudent = req.body;
   let id = req.params.id;
-  Model.Student.update(newStudent, {
-    where : {
-      id : id
-    }
-  })
-  .then((data) => {
-    res.redirect('/student')
-  })
+  Model.Student.findByPk(+id)
+    .then(student => {
+      if (student) {
+        return student.update(newStudent);
+      } else {
+        throw (`Student Not Found`);
+      }
+    })
 
-  .catch((err) => {
-    console.log(err);
-  })
+    .then((data) => {
+      req.flash('postSuccessMsg', `Successfully edited`);
+      res.redirect('/student')
+    })
+
+    .catch((err) => {
+      req.flash('postErrorMsg', err.errors[0].message.msg);
+      res.redirect('/student')
+    })
 })
 
 app.get('/teacher', (req, res) => {
@@ -172,29 +179,39 @@ app.post('/teacher', (req, res) => {
   let newTeacher = req.body;
   Model.Teacher.create(newTeacher)
   .then((data) => {
+    req.flash('postSuccessMsg', `Successfully added`);
+    console.log('a');
     res.redirect('/teacher')
   })
 
   .catch((err) => {
-    console.log(err);
+    req.flash('postErrorMsg', err.errors[0].message.msg);
+    res.redirect('/teacher')
   })
 })
 
 app.post('/teacher/edit/:id', (req, res) => {
   let newTeacher = req.body;
   let id = req.params.id;
-  Model.Teacher.update(newTeacher, {
-    where : {
-      id : id
-    }
-  })
-  .then((data) => {
-    res.redirect('/teacher')
-  })
+  Model.Teacher.findByPk(+id)
+    .then(teacher => {
+      if (teacher) {
+        return teacher.update(newTeacher);
+      } else {
+        throw (`Teacher Not Found`);
+      }
+    })
 
-  .catch((err) => {
-    console.log(err);
-  })
+    .then((data) => {
+      console.log('a');
+      req.flash('postSuccessMsg', `Successfully edited`);
+      res.redirect('/teacher')
+    })
+
+    .catch((err) => {
+      req.flash('postErrorMsg', err.errors[0].message.msg);
+      res.redirect('/teacher')
+    })
 })
 
 app.get('/subject', (req, res) => {
