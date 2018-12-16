@@ -1,0 +1,46 @@
+Sequelize + Express + Postgres (No Association)
+
+Kita akan membuat sebuah aplikasi express yang datanya akan didapatkan / dimasukkan ke dalam database.
+Release 0: Model & Migrations
+
+Teacher
+
+    Buatlah model baru bernama Teacher dengan field sebagai berikut. Lakukan migrasi. first_name : string last_name : string
+
+    Buat migrasi untuk menambahkan field ‘email : string’ pada tabel Teachers, jangan lupa untuk modifikasi model dan melakukan migrasi.
+
+    Buat seeder untuk tabel Teachers, masukkan data-data berikut lalu lakukan seed
+
+seed_teacher
+
+Subject
+
+    Buat model baru dengan nama Subject dengan field berikut. Lakukan migrasi. subject_name : string
+
+    Buat seeder untuk tabel Subjects, masukkan data-data berikut lalu lakukan seed.
+
+seed_subject
+
+Student
+
+    Buatlah model baru bernama Student dengan skema seperti berikut first_name : string last_name : string email : string
+
+tidak perlu seed Student
+Release 1: Express + Sequelize - CRUD
+
+Student Buatlah aplikasi Express dengan routing seperti di bawah ini. Pisahkan routing dari file app.js dan terpisah dari fitur lain.
+
+    GET /students (menampilkan semua data teacher)
+    GET /students/add (menampilkan form input saja)
+    POST /students/add (meng-handle input dari form)
+    GET /students/edit/:id (menampilkan form data student berdasarkan id)
+    POST /students/edit/:id (meng-handle input dari form saat update)
+    GET /students/delete/:id (men-delete data berdasarkan id)
+
+Lanjutkan dengan membuat CRUD Teacher & Subject
+
+Contoh tampilannya :
+    show 
+    add 
+    edit
+    delete

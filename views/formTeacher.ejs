@@ -1,0 +1,23 @@
+<%- include ./partials/header.ejs %>
+<%- include ./partials/navbar.ejs %>
+
+<form style="padding-top: 3%; padding-left: 6%;padding-right: 6%;padding-bottom: 2%;background-color: rgb(111, 219, 226); width: 50%; margin-left: 20%; text-align: center" method="POST">
+    <div class="form-group">
+      <label for="first_name">First Name:</label>
+      <input style=" width: 95%" type="text" class="form-control" name="first_name">
+      </div>
+    <div class="form-group">
+      <label for="last_name">Last Name:</label>
+      <input style=" width: 95%"type="text" class="form-control" name="last_name">
+    </div>
+    <div class="form-group">
+        <label for="email">Email Address:</label>
+        <input style=" width: 95%"type="email" class="form-control" name="email">
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox"> Remember me</label>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form> 
+
+<%- include ./partials/footer.ejs %>
