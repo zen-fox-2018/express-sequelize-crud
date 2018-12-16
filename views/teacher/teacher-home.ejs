@@ -1,0 +1,31 @@
+<%- include ../partials/headers.ejs %>
+<%- include ../partials/navbar.ejs %>
+
+<title>Teachers Page</title>
+</head>
+<body>
+    <h1>WELLCOME TEACHER</h1>
+    <table>
+        <tr>
+            <th>No.</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+        </tr>
+        <%let no = 1%>
+        <% data.forEach(teacher => { %>
+        <tr>
+            <td><%= no %></td>
+            <td><%= teacher.first_name %></td>
+            <td><%= teacher.last_name %></td>
+            <td><%= teacher.email %></td>
+            
+            <td><a href="/teachers/edit/<%= teacher.id %>">Edit</a> || <a href="/teachers/delete/<%= teacher.id %>">Delete</a></td>
+            <% no++ %>
+        </tr>
+        <% }) %>
+    </table>
+
+    <h5><a href="/">HOME</a></h5>
+</body>
+</html>
