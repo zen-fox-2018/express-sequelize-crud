@@ -40,7 +40,20 @@ app.post("/students/add", function(req, res) {
         email: req.body.email
     }
     Students.addStudents(data).then(students => {
-        res.redirect("/students")
+        res.redirect("/students", {data: students})
+    }).catch(err => {
+        res.send(err)
+    })
+})
+
+//add teacher
+app.get("/teachers/add", function(req, res) {
+    res.render("teachers-form.ejs")
+})
+
+app.post("/teachers/add", function(req, res) {
+    Teacher.addTeacher(req.body).then(teacher => {
+        res.redirect("/teachers")
     }).catch(err => {
         res.send(err)
     })
@@ -64,13 +77,35 @@ app.post("/students/edit/:id", function(req, res) {
     })
 })
 
-//add teacher
-app.get("/teachers/add", function(req, res) {
-    res.render("teachers-form.ejs")
+app.get("/students/delete/:id", function(req, res) {
+    Students.deleteStudents(req.params.id).then(deleted => {
+        res.redirect("/students")
+    }).catch(err => {
+        res.send(err)
+    })
 })
 
-app.post("/teachers/add", function(req, res) {
-    Teacher.addTeacher(req.body).then(teacher => {
+//edit teachers
+app.get("/teachers/edit/:id", function(req, res) {
+    Teacher.findOne(req.params.id).then(found =>{
+        res.render("edit-teachers.ejs", {data: found.dataValues})
+    }).catch(err => {
+        res.send(err)
+    })
+})
+
+app.post("/teachers/edit/:id", function(req, res) {
+    Teacher.updateTeachers(req.body, req.params.id).then(updated => {
+        res.redirect("/teachers")
+    }).catch(err => {
+        res.send(err)
+    })
+})
+
+//delete teachers
+app.get("/teachers/delete/:id", function(req, res) {
+    Teacher.deleteTeachers(req.params.id).then(deleted => {
+        // res.send("sukses")
         res.redirect("/teachers")
     }).catch(err => {
         res.send(err)
@@ -99,20 +134,19 @@ app.post("/subjects/add", function(req, res) {
     })
 })
 
-app.get("/students/delete/:id", function(req, res) {
-    Students.deleteStudents(req.params.id).then(deleted => {
-        // res.send("sukses")
-        res.redirect("/students")
+//edit subjects
+app.get("/subjects/edit/:id", function(req, res) {
+    Subject.findByOne(req.params.id).then(found =>{
+        res.render("edit-subjects.ejs", {data: found.dataValues})
     }).catch(err => {
         res.send(err)
     })
 })
 
-//delete teachers
-app.get("/teachers/delete/:id", function(req, res) {
-    Teacher.deleteTeachers(req.params.id).then(deleted => {
-        // res.send("sukses")
-        res.redirect("/teachers")
+app.post("/subjects/edit/:id", function(req, res) {
+    // console.log(req.body)
+    Subject.updateSubjects(req.body, req.params.id).then(data => {
+        res.redirect("/subjects")
     }).catch(err => {
         res.send(err)
     })

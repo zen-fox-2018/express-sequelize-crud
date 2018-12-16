@@ -13,6 +13,16 @@ class SubjectsController {
         })
     }
 
+    static findByOne(input) {
+        return new Promise((resolve, reject) => {
+            Model.Subject.findOne({where:{id: input}}).then(data => {
+                resolve(data)
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    }
+
     static addSubject(input) {
         return new Promise((resolve, reject) => {
             let newSubject = {
@@ -20,6 +30,20 @@ class SubjectsController {
             }
             Model.Subject.create(newSubject).then(data => {
                 resolve(data)
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    }
+
+    static updateSubjects(input, id) {
+        return new Promise((resolve, reject) => {
+            let updated = {
+                subject_name: input.subject_name
+            }
+
+            Model.Subject.update(updated, {where:{id}}).then(updated => {
+                resolve(updated)
             }).catch(err => {
                 reject(err)
             })
