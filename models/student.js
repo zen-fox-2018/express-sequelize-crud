@@ -1,10 +1,42 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Student = sequelize.define('Student', {
-    first_name: DataTypes.STRING,
-    last_name: DataTypes.STRING,
-    email: DataTypes.STRING
-  }, {});
+    first_name: {
+      type:DataTypes.STRING, 
+      validate: {
+        isAlpha: {
+          args : true,
+          msg: "First name only have letters"
+        }, 
+        len:{
+          args: [1, 15],
+          msg: "First name must between 1 - 15 words"
+        }
+      }
+    },
+    last_name: {
+      type:DataTypes.STRING, 
+      validate: { 
+        isAlpha: {
+          args : true,
+          msg: "Last name only have letters"
+        }, 
+        len:{
+          args: [1, 15],
+          msg: "Last name must between 1 - 15 words"
+        }
+      }
+    },
+    email: {
+      type:DataTypes.STRING,
+      validate: {
+        is: {
+          args: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i , 
+          msg: "Email must be filled with email formats"
+      }
+    }
+  }
+ }, {});
   Student.associate = function(models) {
     // associations can be defined here
   };

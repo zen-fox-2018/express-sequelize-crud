@@ -25,8 +25,9 @@ app.get('/students?', (req,res)=> {
    
     Student.findAll()
     .then(data => {
+        let err = req.query.err
         let info= req.query.info
-        res.render('student.ejs' ,{dataSend:data, info:info})
+        res.render('student.ejs' ,{dataSend:data, info:info, err:err})
     })
     .catch(err => res.send(err))
     
@@ -43,7 +44,7 @@ app.post('/students/add', (req, res)=> {
     .then(newUser => {
         res.redirect(`/students?info=Success%20Add%20Data%20${req.body.first_name}`)
     })
-    .catch(err => res.send(err))
+    .catch(err => res.redirect(`/students?err=${err}`))
    
 })
 
@@ -63,7 +64,7 @@ app.post('/students/edit/:id',(req, res)=> {
     .then(()=> {
         res.redirect(`/students?info=Success%20Edit%20Student%20Data%20${req.body.first_name}`)
     })
-    .catch(err => res.send(err))
+    .catch(err => res.redirect(`/students?err=${err}`))
     
 })
 
@@ -75,14 +76,15 @@ app.get('/students/delete/:id', (req, res)=> {
     .then(()=> {
         res.redirect(`/students?info=Success%20Delete%20Data%20With%20Id%20${tempId}`)
     })
-    .catch(err => res.send(err))
+    .catch(err => res.redirect(`/students?err=${err}`))
 })
 
 app.get('/teachers?', (req,res) => {
     Teacher.findAll()
     .then(data=> {
         let info = req.query.info
-        res.render('teacher.ejs', {dataSend:data, info:info})
+        let err = req.query.err
+        res.render('teacher.ejs', {dataSend:data, info:info , err:err})
     })
     .catch(err => res.send(err))
 })
@@ -97,7 +99,7 @@ app.post('/teachers/add', (req, res)=> {
     .then(() => {
         res.redirect(`/teachers?info=Success%20Add%20Data%20${req.body.first_name}`)
     })
-    .catch(err => res.send(err))
+    .catch(err => res.redirect(`/teachers?err=${err}`))
 })
 
 app.get('/teachers/edit/:id', (req, res)=> {
@@ -115,7 +117,7 @@ app.post('/teachers/edit/:id',(req, res)=> {
     .then(()=> {
         res.redirect(`/teachers?info=Success%20Edit%20Teacher%20Data%20${req.body.first_name}`)
     })
-    .catch(err => res.send(err))
+    .catch(err => res.redirect(`/teachers?err=${err}`))
     
 })
 
@@ -127,13 +129,15 @@ app.get('/teachers/delete/:id', (req, res) => {
     .then(()=> {
         res.redirect(`/teachers?info=Success%20Delete%20Teacher%20With%20Id%20${tempId}`)
     })
-    .catch(err => res.send(err))
+    .catch(err => res.redirect(`/teachers?err=${err}`))
 })
 
 app.get('/subjects?', (req, res)=> {
     let info = req.query.info
+    let err = req.query.err
     Subject.findAll()
-    .then(data => res.render('subject.ejs', {dataSend:data , info:info}))
+    .then(data => res.render('subject.ejs', {dataSend:data , info:info, err:err}))
+    .catch(err => res.send(err))
 })
 
 app.get('/subjects/add', (req, res)=> {
@@ -146,7 +150,7 @@ app.post('/subjects/add', (req, res)=> {
     .then(() => {
         res.redirect(`/subjects?info=Success%20Add%20Data%20${req.body.subject_name}`)
     })
-    .catch(err => res.send(err))
+    .catch(err => res.redirect(`/subjects?err=${err}`))
 })
 
 app.get('/subjects/edit/:id', (req, res)=> {
@@ -164,7 +168,7 @@ app.post('/subjects/edit/:id',(req, res)=> {
     .then(()=> {
         res.redirect(`/subjects?info=Success%20Edit%20Subject%20Data%20${req.body.subject_name}`)
     })
-    .catch(err => res.send(err))
+    .catch(err => res.redirect(`/subjects?err=${err}`))
     
 })
 
@@ -175,7 +179,7 @@ app.get('/subjects/delete/:id', (req, res)=> {
         id:tempId
     }})
     .then(()=> res.redirect(`/subjects?info=Success%20Delete%20Subject%20With%20Id%20${tempId}`))
-    .catch(err => res.send(err))
+    .catch(err => res.redirect(`/subjects?err=${err}`))
 })
 
 app.listen(port, () => console.log(`Server running at port ${port}`))
