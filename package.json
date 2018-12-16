@@ -1,0 +1,19 @@
+{
+  "name": "express-sequelize-crud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zen-fox-2018/express-sequelize-crud.git"
+  },
+  "author": "Herman Yulianto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zen-fox-2018/express-sequelize-crud/issues"
+  },
+  "homepage": "https://github.com/zen-fox-2018/express-sequelize-crud#readme"
+}
