@@ -1,7 +1,7 @@
 
 const Model = require("../models");
 
-class Controller {
+class StudentController {
 
     static getAllDataStudents() {
         return new Promise((resolve, reject) => {
@@ -28,9 +28,26 @@ class Controller {
         })
     }
 
-    static updateStudents(data) {
+    static findByOne(input) {
+        // console.log(input)
+        return new Promise ((resolve, reject) => {
+            Model.Student.findOne({where: {
+                id: input
+            }}).then(data => {
+                resolve(data)
+            }).catch(err => {
+                reject(err)
+            })
+        })
+    }
+
+    static updateStudents(data, id) {
         return new Promise((resolve, reject) => {
-            Model.Student.update(data, { where:{ id: data.id } }).then(updated => {
+            Model.Student.update({
+                first_name: data.first_name,
+                last_name: data.last_name,
+                email: data.email
+            }, { where:{ id: id } }).then(updated => {
                 resolve(updated)
             }).catch(err => {
                 reject(err)
@@ -49,4 +66,4 @@ class Controller {
     }
 }
 
-module.exports = Controller
+module.exports = StudentController
