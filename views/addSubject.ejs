@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add Subject</title>
+        <style>
+            input {
+                margin: 10px;
+                border: 1px solid;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+            button {
+                border-radius: 5px;
+                margin-left: 10px;
+            }
+            label {
+                margin-left: 10px;
+
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="text-align: center; color: royalblue">Add Subject Data</h1>
+        <h4 style="text-align: center;"><a style="color: royalblue;text-decoration: none" href= "/subjects" >show all data</a></h4>
+        <form action="/subject/add" method = "POST">
+            <label for= "Subject Name"><b>Subject Name</b></label><br>
+            <input type="text" name="Subject Name" style="width: 98%; height: 30px;" required><br>
+            <button type= "submit" style="height: 40px; color: white; background-color: royalblue; ">Add Subject</button>
+        </form>
+    </body>
+</html>
