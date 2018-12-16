@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       }, 
       isUnique: function(value, next) {
         let self = this
-        Subject.find({
+        Teacher.find({
           where:{email: value} 
         })
        .then(data=> {
