@@ -29,7 +29,6 @@ class StudentController {
     }
 
     static findByOne(input) {
-        // console.log(input)
         return new Promise ((resolve, reject) => {
             Model.Student.findOne({where: {
                 id: input
@@ -43,11 +42,12 @@ class StudentController {
 
     static updateStudents(data, id) {
         return new Promise((resolve, reject) => {
-            Model.Student.update({
+            let updateData = {
                 first_name: data.first_name,
                 last_name: data.last_name,
                 email: data.email
-            }, { where:{ id: id } }).then(updated => {
+            }
+            Model.Student.update(updateData, { where:{id} }).then(updated => {
                 resolve(updated)
             }).catch(err => {
                 reject(err)

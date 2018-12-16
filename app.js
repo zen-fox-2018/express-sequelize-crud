@@ -40,7 +40,25 @@ app.post("/students/add", function(req, res) {
         email: req.body.email
     }
     Students.addStudents(data).then(students => {
-        res.redirect("/students", {data: students})
+        res.redirect("/students")
+    }).catch(err => {
+        res.send(err)
+    })
+})
+
+//edit students
+app.get("/students/edit/:id", function(req, res) {
+    Students.findByOne(req.params.id).then(found => {
+        res.render("edit-students.ejs", {data: found.dataValues})
+    }).catch(err => {
+        res.send(err)
+    })
+})
+
+app.post("/students/edit/:id", function(req, res) {
+    let data = req.body;
+    Students.updateStudents(data, req.params.id).then(updated => {
+        res.redirect("/students")
     }).catch(err => {
         res.send(err)
     })
@@ -80,28 +98,6 @@ app.post("/subjects/add", function(req, res) {
         res.send(err)
     })
 })
-
-//edit students
-app.get("/students/edit/:id", function(req, res) {
-    Students.findByOne(req.params.id).then(found => {
-        res.render("edit-students.ejs", {data: found.dataValues})
-    }).catch(err => {
-        res.send(err)
-    })
-})
-
-// app.post("/students/edit/:id", function(req, res) {
-
-//     let data = req.body;
-
-//     Students.updateStudents(data, req.params.id).then(updated => {
-//         // res.redirect("/students", { data: data.daataValues })
-//         // console.log(updated)
-//         // res.send(data)
-//     }).catch(err => {
-//         res.send(err)
-//     })
-// })
 
 app.get("/students/delete/:id", function(req, res) {
     Students.deleteStudents(req.params.id).then(deleted => {
