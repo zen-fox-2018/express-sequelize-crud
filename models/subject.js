@@ -5,8 +5,22 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       validate : {
         len: {
-          args: [3, 10],
+          args: [3, 20],
           msg: "Subject name must between 3 - 20 words"
+        }, 
+        isUnique: function(value, next) {
+          let self = this
+          Subject.find({
+            where:{subject_name: value} 
+          })
+         .then(data=> {
+           
+           if(data && data.id != self.id) throw next(`Subject already added`)
+           next()
+         })
+         .catch(err => {
+           next(err)
+         })
         }
       }
     }

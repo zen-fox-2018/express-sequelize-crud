@@ -33,6 +33,20 @@ module.exports = (sequelize, DataTypes) => {
         is: {
           args: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i , 
           msg: "Email must be filled with email formats"
+      }, 
+      isUnique: function(value, next) {
+        let self = this
+        Subject.find({
+          where:{email: value} 
+        })
+       .then(data=> {
+         
+         if(data && data.id != self.id) throw next(`Email already used`)
+         next()
+       })
+       .catch(err => {
+         next(err)
+       })
       }
     }
   }
