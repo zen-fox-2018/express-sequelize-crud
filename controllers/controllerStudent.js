@@ -28,7 +28,7 @@ class ControllerStudent {
         resolve(data)
       })
       .catch(function(err) {
-        reject(data)
+        reject(err)
       })
     })
     

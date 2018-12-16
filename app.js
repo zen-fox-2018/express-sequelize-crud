@@ -43,7 +43,7 @@ app.post('/teacher/add',function(req, res) {
       res.redirect('/')
     })
     .catch(function(err) {
-      res.render('errorpage.ejs')
+      res.render('errorpage.ejs', {msg : err.message})
     })
   
 })
@@ -55,8 +55,7 @@ app.get("/teacher/edit/:id" , function(req, res) {
       res.render('editDataPerson.ejs', {user: data, route: 'teacher' })
     })
     .catch(function(err) {
-      console.log(err)
-      res.render('errorpage.ejs')
+      res.render('errorpage.ejs', {msg : err.message})
     }) 
 })
 
@@ -72,7 +71,7 @@ app.post("/teacher/edit/Teacher", function(req, res) {
     })
     .catch(function(err) {
       console.log(err)
-      res.render('errorpage.ejs')
+      res.render('errorpage.ejs', {msg : err.message})
     })
   
 })
@@ -84,8 +83,7 @@ app.get("/teacher/delete/:id" , function(req, res) {
       res.redirect('/')
     })
     .catch(function(err) {
-      console.log(err)
-      res.render('errorPage.ejs')
+      res.render('errorpage.ejs', {msg : err.message})
     })
   
 })
@@ -102,7 +100,7 @@ app.get('/student',function(req, res) {
       
     })
     .catch(function(err) {
-      res.render('errorpage.ejs')
+      res.render('errorpage.ejs', {msg : err.message})
     })
 })
 
@@ -120,7 +118,7 @@ app.post('/student/add', function(req, res) {
     res.redirect('/')
   })
   .catch(function(err) {
-    res.render('errorpage.ejs')
+    res.render('errorpage.ejs', {msg : err.message})
   })
 })
 
@@ -131,7 +129,7 @@ app.get('/student/edit/:id', function(req, res) {
       res.render('editDataPerson.ejs', {user:data, route: 'student'})
     })
     .catch(function(err) {
-      res.render('errorpage.ejs')
+      res.render('errorpage.ejs', {msg : ''})
     })
 })
 
@@ -145,7 +143,7 @@ app.post('/student/edit/:id', function(req, res) {
       res.redirect('/')
     })
     .catch(function(err) {
-      res.render('errorpage.ejs')
+      res.render('errorpage.ejs', {msg : err.message})
     })
 })
 
@@ -156,7 +154,7 @@ app.get('/student/delete/:id', function(req, res) {
       res.redirect('/')
     })
     .catch(function(err) {
-      res.render('errorpage.ejs')
+      res.render('errorpage.ejs', {msg : err.message})
     })
 })
 //=========================SUBJECT============================
@@ -171,7 +169,7 @@ app.get('/subject',function(req, res) {
     })
     .catch(function(err) {
       console.log(err)
-      res.render('errorpage.ejs')
+      res.render('errorpage.ejs', {msg : err.message})
     })
 })
 
@@ -186,7 +184,7 @@ app.post('/Subject/add', function(req, res) {
       res.redirect('/')
     })
     .catch(function(err) {
-      res.render('errorpage.ejs')
+      res.render('errorpage.ejs', {msg : err.message})
     })
 })
 
@@ -197,7 +195,7 @@ app.get('/Subject/edit/:id', function(req, res) {
       res.render('editSubject.ejs', {user: data})
     })
     .catch(function(err) {
-      res.render('errorpage.ejs')
+      res.render('errorpage.ejs', {msg : err.message})
     })
 })
 
@@ -209,7 +207,7 @@ app.post('/Subject/edit', function(req, res) {
       res.redirect('/')
     })
     .catch(function(err) {
-      res.render('errorpage.ejs')
+      res.render('errorpage.ejs', {msg : err.message})
     })
 })
 
@@ -220,7 +218,7 @@ app.get('/Subject/delete/:id', function(req, res) {
       res.redirect('/')
     })
     .catch(function(err) {
-      res.render('errorpage.ejs')
+      res.render('errorpage.ejs', {msg : err.message})
     })
 })
 
