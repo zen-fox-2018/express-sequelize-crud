@@ -9,14 +9,14 @@
 <body>
 
   <form action="/teachers/edit/<%= editTeacher.dataValues.id %>" method="post">
-    
+
     <div class="container">
       <h2 style="text-align: center">Edit Teacher Data</h2>
 
       <hr>
-      <input type="text" name="first_name" placeholder="<%= editTeacher.dataValues.first_name %>">
-      <input type="text" name="last_name" placeholder="<%= editTeacher.dataValues.last_name %>">
-      <input type="text" name="email" placeholder="<%= editTeacher.dataValues.email %>">
+      <input type="text" name="first_name" placeholder="<%= editTeacher.dataValues.first_name %>" required>
+      <input type="text" name="last_name" placeholder="<%= editTeacher.dataValues.last_name %>" required>
+      <input type="text" name="email" placeholder="<%= editTeacher.dataValues.email %>" required>
       <hr>
       <input class="add-btn" type="submit" value="Edit Teacher">
 

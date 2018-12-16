@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Subjects Data</title>
+  <link rel="stylesheet" href="/public/input.css" type="text/css">
+</head>
+
+<body>
+
+  <form action="/subjects/edit/<%= editSubjects.dataValues.id %>" method="post">
+
+    <div class="container">
+      <h2 style="text-align: center">Edit Subject Data</h2>
+
+      <hr>
+      <input type="text" name="subject_name" placeholder="<%= editSubjects.subject_name %>" required>
+      <hr>
+      <input class="add-btn" type="submit" value="Edit Subject">
+
+    </div>
+  </form>
+
+</body>
+
+</html>

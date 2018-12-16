@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Subjects Data</title>
+  <link rel="stylesheet" href="/public/table.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <table>
+
+      <h2 style="text-align: center; font-weight: bold">Subjects Data</h2>
+
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Subject Name</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+
+      <% dataSubjects.forEach(data => { %>
+
+      <tbody>
+        <tr>
+          <th>
+            <%= data.dataValues.id %>
+          </th>
+          <td>
+            <%= data.dataValues.subject_name %>
+          </td>
+          <td>
+            <a href="/subjects/edit/<%= data.dataValues.id %>">
+              <i class="material-icons button edit">edit</i>
+            </a>
+            <a href="/subjects/delete/<%= data.dataValues.id %>" onclick="return confirm('Delete this data?')">
+              <i class="material-icons button delete">delete</i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+
+      <% }); %>
+
+    </table>
+
+    <form action="/subjects/add" method="get">
+          <input class="add-btn" type="submit" value="Add Subject">
+        </form>
+
+  </div>
+
+
+
+</body>
+
+</html>

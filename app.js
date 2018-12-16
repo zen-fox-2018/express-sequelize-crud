@@ -17,16 +17,17 @@ app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
+
 // Student Section
 app.get('/students', (req, res) => {
 
   db.Student.findAll()
 
-  .then((result) => {
-    res.render('student', {dataStudent: result});
-  }).catch((err) => {
-    res.send(err);
-  });
+    .then((result) => {
+      res.render('student', { dataStudent: result });
+    }).catch((err) => {
+      res.send(err);
+    });
 
 });
 
@@ -41,12 +42,12 @@ app.post('/students/add', (req, res) => {
     last_name: req.body.last_name,
     email: req.body.email
   })
-  
-  .then(() => {
-    res.redirect('/students');
-  }).catch((err) => {
-    res.send(err);
-  });
+
+    .then(() => {
+      res.redirect('/students');
+    }).catch((err) => {
+      res.send(err);
+    });
 
 });
 
@@ -58,45 +59,47 @@ app.get('/students/edit/:id', (req, res) => {
     }
   })
 
-  .then((result) => {
-    res.render('studentEdit', {editStudent: result});
-  }).catch((err) => {
-    res.send(err);
-  });
-  
+    .then((result) => {
+      res.render('studentEdit', { editStudent: result });
+    }).catch((err) => {
+      res.send(err);
+    });
+
 });
 
 app.post('/students/edit/:id', (req, res) => {
+
   db.Student.update({
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     email: req.body.email
   }, {
-    where: {
-      id: req.params.id
-    }
-  })
+      where: {
+        id: req.params.id
+      }
+    })
 
-  .then(() => {
-    res.redirect('/students');
-  }).catch((err) => {
-    res.send(err);
-  });
+    .then(() => {
+      res.redirect('/students');
+    }).catch((err) => {
+      res.send(err);
+    });
 
 });
 
 app.get('/students/delete/:id', (req, res) => {
+
   db.Student.destroy({
     where: {
       id: req.params.id
     }
   })
 
-  .then(() => {
-    res.redirect('/students');
-  }).catch((err) => {
-    res.send(err);
-  });
+    .then(() => {
+      res.redirect('/students');
+    }).catch((err) => {
+      res.send(err);
+    });
 
 });
 
@@ -106,7 +109,7 @@ app.get('/teachers', (req, res) => {
   db.Teacher.findAll()
 
     .then((result) => {
-      res.render('teacher', {dataTeacher: result});
+      res.render('teacher', { dataTeacher: result });
     }).catch((err) => {
       res.send(err);
     });
@@ -124,12 +127,12 @@ app.post('/teachers/add', (req, res) => {
     last_name: req.body.last_name,
     email: req.body.email
   })
-  
-  .then(() => {
-    res.redirect('/teachers');
-  }).catch((err) => {
-    res.send(err);
-  });
+
+    .then(() => {
+      res.redirect('/teachers');
+    }).catch((err) => {
+      res.send(err);
+    });
 
 });
 
@@ -141,45 +144,127 @@ app.get('/teachers/edit/:id', (req, res) => {
     }
   })
 
-  .then((result) => {
-    res.render('teacherEdit', {editTeacher: result});
-  }).catch((err) => {
-    res.send(err);
-  });
+    .then((result) => {
+      res.render('teacherEdit', { editTeacher: result });
+    }).catch((err) => {
+      res.send(err);
+    });
 
 });
 
 app.post('/teachers/edit/:id', (req, res) => {
+
   db.Teacher.update({
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     email: req.body.email
   }, {
-    where: {
-      id: req.params.id
-    }
-  })
+      where: {
+        id: req.params.id
+      }
+    })
 
-  .then(() => {
-    res.redirect('/teachers');
-  }).catch((err) => {
-    res.send(err);
-  });
+    .then(() => {
+      res.redirect('/teachers');
+    }).catch((err) => {
+      res.send(err);
+    });
 
 });
 
 app.get('/teachers/delete/:id', (req, res) => {
+
   db.Teacher.destroy({
     where: {
       id: req.params.id
     }
   })
 
-  .then(() => {
-    res.redirect('/teachers');
-  }).catch((err) => {
-    res.send(err);
-  });
+    .then(() => {
+      res.redirect('/teachers');
+    }).catch((err) => {
+      res.send(err);
+    });
+
+});
+
+// Subject Section
+app.get('/subjects', (req, res) => {
+
+  db.Subject.findAll()
+
+    .then((result) => {
+      res.render('subject', { dataSubjects: result });
+    }).catch((err) => {
+      res.send(err);
+    });
+
+});
+
+app.get('/subjects/add', (req, res) => {
+  res.render('subjectAdd');
+});
+
+app.post('/subjects/add', (req, res) => {
+
+  db.Subject.create({
+    subject_name: req.body.subject_name
+  })
+
+    .then(() => {
+      res.redirect('/subjects');
+    }).catch((err) => {
+      res.send(err);
+    });
+});
+
+app.get('/subjects/edit/:id', (req, res) => {
+
+  db.Subject.findOne({
+    where: {
+      id: req.params.id
+    }
+  })
+
+    .then((result) => {
+      res.render('subjectEdit', { editSubjects: result });
+    }).catch((err) => {
+      res.send(err);
+    });
+
+});
+
+app.post('/subjects/edit/:id', (req, res) => {
+
+  db.Subject.update({
+    subject_name: req.body.subject_name
+  }, {
+      where: {
+        id: req.params.id
+      }
+    })
+
+    .then(() => {
+      res.redirect('/subjects');
+    }).catch((err) => {
+      res.send(err);
+    });
+
+});
+
+app.get('/subjects/delete/:id', (req, res) => {
+
+  db.Subject.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+
+    .then(() => {
+      res.redirect('/subjects');
+    }).catch((err) => {
+      res.send(err);
+    });
 
 });
 
