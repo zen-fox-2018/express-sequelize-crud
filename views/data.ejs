@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All <%= type%></title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+  <br>
+    <div class="container w-50">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% data.forEach( a => { %>
+            <tr>
+              <td> <%= a.id %> </td>
+              <td> <%= a.first_name %> </td>
+              <td> <%= a.last_name %> </td>
+              <td> <%= a.email %> </td>
+              <td>
+                <form action="/<%= type%>" method="POST">
+                  <button type="submit" class="btn btn-warning" name="id" value="<%= a.id%>">Edit</button>
+                </form>
+              </td>
+            </tr>
+              <% }) %>
+        </tbody>
+      </table>
+    </div> 
+</body>
+</html>
