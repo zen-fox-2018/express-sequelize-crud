@@ -3,6 +3,7 @@ const Model = require('./models')
 const express = require('express')
 const Teacher = Model.Teacher
 const Student = Model.Student
+const Subject = Model.Subject
 const app = express()
 const port = 3002
 
@@ -13,6 +14,70 @@ app.use(express.urlencoded({extended:false}))
 app.get('/', (req, res) => {
     res.render("home.ejs")
 })
+app.get('/subjects', (req,res) => {
+    Subject.findAll()
+        .then((data) =>{
+            res.render('subject.ejs', {data})
+        })
+        .catch((err)=> {
+            res.send(err)
+        })
+})
+
+app.get('/subjects/add', (req, res) => {
+    res.render('formSubject.ejs')
+})
+
+app.post('/subjects/add', (req, res) => {
+   
+    Subject.create(req.body)
+        .then((data) => {
+            res.redirect('/subjects')
+        })
+        .catch((err) => {
+            res.send(err)
+        })
+})
+
+app.get('/subjects/edit/:id', (req, res) => {
+    req.params.id = req.params.id.slice(1)
+    Subject.findOne({where:{id:req.params.id}})
+        .then((data)=> {
+            res.render('formEditSubject.ejs', {data})
+        })
+        .catch((err) => {
+            res.send(err)
+        })
+})
+
+app.post('/subjects/edit/:id', (req, res) => {
+    let id = Number(req.params.id.slice(1))
+    req.body.id = id
+    Subject.update(req.body,{where:{id}})
+        .then((data) => {
+            res.redirect('/subjects')
+        })
+        .catch((err) => {
+            res.send(err)
+        })
+})
+
+app.get('/subjects/delete/:id', (req, res) => {
+    let id = Number(req.params.id.slice(1))
+    Subject.destroy({where:{id}})
+        .then((data) => {
+            res.redirect('/subjects')
+        })
+        .catch((err) => {
+            res.send(err)
+        })
+})
+
+
+
+
+
+
 
 app.get('/teachers', (req, res) => {
 
@@ -75,7 +140,6 @@ app.get('/teachers/delete/:id', (req, res) => {
 })
 
 
-
 app.get('/students/add', (req,res) => {
     res.render('formStudent.ejs')
 })
@@ -135,6 +199,9 @@ app.get('/students/delete/:id', (req, res) => {
         })
 })
 
+app.get('/subjects', (req, res) => {
+    
+})
 
 app.listen(port, () =>{
     console.log(`server listen on ${port}`)

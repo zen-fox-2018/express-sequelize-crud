@@ -1,0 +1,33 @@
+<%- include ./partials/header.ejs %>
+<%- include ./partials/navbar.ejs %>
+
+<div class="container">
+        <h2>List Students</h2>
+        <p>*list of all Students at school*</p>            
+        <table class="table table-striped">
+          <thead>
+            <tr>
+            <th>NO.</th>
+              <th>Subject Name</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let i = 0 ;i<data.length; i++) { %>
+              <tr>
+              <td><%= i+1 %></td>
+              <td><%= data[i]['subject_name']%></td>
+              <td><a href="/subjects/edit/:<%= data[i].id %>" class="btn btn-info" role="button">Edit</a>    <a href="/subjects/delete/:<%= data[i].id %>" class="btn btn-info" role="button">delete</a></td>
+              </tr>
+            <% } %>
+                  
+            </tbody>
+          </table>
+      </div>
+
+      <br>
+
+<a style="text-align:center ; margin-left: 10%" href="/subjects/add" class="btn btn-info" role="button">Add Subject</a>
+      
+
+<%- include ./partials/footer.ejs %>
