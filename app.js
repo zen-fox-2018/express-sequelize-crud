@@ -56,16 +56,26 @@ app.get('/students/edit/:id', (req, res) => {
 
 app.post('/students/edit/:id',(req, res)=> {
     let tempId = req.params.id
-    Student.update(req.body,{
-        where:{
-            id:tempId
+    let extraErr = ''
+    
+    Student.find({where : {
+        email: req.body.email
+    }})
+    .then(data => {
+        if(data) {
+            delete req.body.email
+            extraErr = `But email not updated`
         }
+        return  Student.update(req.body,{
+            where:{
+                id:tempId
+            }
+        })
     })
     .then(()=> {
-        res.redirect(`/students?info=Success%20Edit%20Student%20Data%20${req.body.first_name}`)
+        res.redirect(`/students?info=Success%20Edit%20Student%20Data%20${req.body.first_name}%20${extraErr}`)
     })
-    .catch(err => res.redirect(`/students?err=${err}`))
-    
+    .catch(err => res.redirect(`/students?err=${err}`))   
 })
 
 app.get('/students/delete/:id', (req, res)=> {
@@ -109,13 +119,23 @@ app.get('/teachers/edit/:id', (req, res)=> {
 
 app.post('/teachers/edit/:id',(req, res)=> {
     let tempId = req.params.id
-    Teacher.update(req.body,{
-        where:{
-            id:tempId
+    let extraErr = ''
+    Teacher.find({where : {
+        email: req.body.email
+    }})
+    .then(data => {
+        if(data) {
+            delete req.body.email
+            extraErr = `But email not updated`
         }
+        return  Teacher.update(req.body,{
+            where:{
+                id:tempId
+            }
+        })
     })
     .then(()=> {
-        res.redirect(`/teachers?info=Success%20Edit%20Teacher%20Data%20${req.body.first_name}`)
+        res.redirect(`/teachers?info=Success%20Edit%20Teacher%20Data%20${req.body.first_name}%20${extraErr}`)
     })
     .catch(err => res.redirect(`/teachers?err=${err}`))
     
