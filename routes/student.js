@@ -4,7 +4,7 @@ const Controller = require('../controllers/studentController')
 route.get('/', (req, res) => {
     Controller.findAll()
         .then(data => {
-            res.render('student-home.ejs', {data: data})
+            res.render('student/student-home.ejs', {data: data})
         })
         .catch(err => {
             res.send(err)
@@ -12,7 +12,7 @@ route.get('/', (req, res) => {
 })
 
 route.get('/add', (req, res) => {
-    res.render('form-add-student.ejs')
+    res.render('student/form-add-student.ejs')
 })
 
 route.post('/add', (req, res) => {
@@ -28,7 +28,7 @@ route.post('/add', (req, res) => {
 route.get('/edit/:id', (req,res) => {
     Controller.findOne(req.params.id)
         .then(data => {
-            res.render('form-edit-student.ejs', {data: data.dataValues})
+            res.render('student/form-edit-student.ejs', {data: data.dataValues})
         })
         .catch(err => {
             res.send(err)
@@ -38,7 +38,7 @@ route.get('/edit/:id', (req,res) => {
 route.post('/edit/:id', (req, res) => {
     Controller.update(req.body, req.params.id)
         .then(data => {
-            res.send('sukses')
+            res.render('student/success-page.ejs')
         })
         .catch(err => {
             res.send('error')

@@ -29,7 +29,6 @@ route.get('/edit/:id', (req, res) => {
     Controller.findOne(req.params.id)
         .then(data => {
             res.render('teacher/form-edit-teacher.ejs', {data: data})
-            // console.log(data)
         })
         .catch(err => {
             res.send(err)
@@ -39,7 +38,6 @@ route.get('/edit/:id', (req, res) => {
 route.post('/edit/:id', (req, res) => {
     Controller.update(req.body, req.params.id)
         .then(data => {
-            // console.log(data)
             res.send('sukses update')
         })
         .catch(err => {

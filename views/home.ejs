@@ -1,15 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HOME</title>
+<%- include partials/headers.ejs %>
+<%- include partials/navbar.ejs %>
+
+<title>HOME</title>
 </head>
 <body>
-    <h1>WELLCOME HOME</h1>
+    <h1>WELLCOME</h1>
 
-    <h5><a href="students/add">Add Student</a></h5>
-    <h5><a href="students/">Students Home</a></h5>
+    <h3>STUDEN LIST</h3>
+    <table class="table">
+            <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody>
+                <%let no = 1%>
+                <% data[0].forEach(student => { %>
+                <tr>
+                    <td><%= no %></td>
+                    <td><%= student.first_name %></td>
+                    <td><%= student.last_name %></td>
+                    <td><%= student.email %></td>
+                    <% no++ %>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <h3>TEACHER LIST</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody>
+                <%let num = 1%>
+                <% data[1].forEach(teacher => { %>
+                <tr>
+                    <td><%= num %></td>
+                    <td><%= teacher.first_name %></td>
+                    <td><%= teacher.last_name %></td>
+                    <td><%= teacher.email %></td>
+                    <% num++ %>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <h3>SUBJECT LIST</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Subject Name</th>
+            </tr>
+            </thead>
+            <tbody>
+                <%let nm = 1%>
+                <% data[2].forEach(subject => { %>
+                <tr>
+                    <td><%= nm %></td>
+                    <td><%= subject.subject_name %></td>
+                    <% nm++ %>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
 </body>
 </html>
